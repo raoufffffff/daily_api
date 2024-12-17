@@ -3,8 +3,78 @@ const Oder = require('../model/order.model')
 
 OrderRoute.get('/', async (req, res)=>{
     try {
-       const items = await Oder.find()
+       const items = await Oder.find({ delevred: false, cancel: false})
        res.send({good: true, result: items, length: items.length}) 
+    } catch (error) {
+        res.send({good: false, message: error.message})
+    }
+})
+
+OrderRoute.get('/:id', async (req, res)=>{
+    const {id} = req.params
+    try {
+       const items = await Oder.findById(id)
+       res.send({good: true, result: items}) 
+    } catch (error) {
+        res.send({good: false, message: error.message})
+    }
+})
+
+OrderRoute.get('/cancel/:id', async (req, res)=>{
+    const {id} = req.params
+    try {
+       const items = await Oder.findByIdAndUpdate(id, {cancel: true})
+       res.send({good: true, result: items}) 
+    } catch (error) {
+        res.send({good: false, message: error.message})
+    }
+})
+
+OrderRoute.get('/cancel', async (req, res)=>{
+    const {id} = req.params
+    try {
+       const items = await Oder.find({cancel: true})
+       res.send({good: true, result: items}) 
+    } catch (error) {
+        res.send({good: false, message: error.message})
+    }
+})
+
+OrderRoute.get('/done', async (req, res)=>{
+    const {id} = req.params
+    try {
+       const items = await Oder.find({delevred: true, cancel: false})
+       res.send({good: true, result: items}) 
+    } catch (error) {
+        res.send({good: false, message: error.message})
+    }
+})
+
+OrderRoute.get('/take', async (req, res)=>{
+    const {id} = req.params
+    try {
+       const items = await Oder.find({take: true, cancel: false})
+       res.send({good: true, result: items}) 
+    } catch (error) {
+        res.send({good: false, message: error.message})
+    }
+})
+
+OrderRoute.get('/take/:id', async (req, res)=>{
+    const {id} = req.params
+    try {
+       const items = await Oder.findByIdAndUpdate(id, {take: true})
+       res.send({good: true, result: items}) 
+    } catch (error) {
+        res.send({good: false, message: error.message})
+    }
+})
+
+OrderRoute.get('/delevred/:id', async (req, res)=>{
+    const {id} = req.params
+    try {
+       const items = await Oder.findByIdAndUpdate(id, {delevred: true})
+       res.send({good: true, result: items}) 
     } catch (error) {
         res.send({good: false, message: error.message})
     }
