@@ -10,7 +10,19 @@ const order = new mongoose.Schema({
     type: Date,
     default: Date.now,
    },
-   items: []
+   items: [],
+   cancel: {
+      default: false,
+      type: Boolean
+   },
+   delevred: {
+      default: false,
+      type: Boolean
+   },
+   take: {
+      default: false,
+      type: Boolean
+   },
 })
 
 
