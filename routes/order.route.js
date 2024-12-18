@@ -30,7 +30,7 @@ OrderRoute.get('/cancel/:id', async (req, res)=>{
     }
 })
 
-OrderRoute.get('/cancel', async (req, res)=>{
+OrderRoute.get('/cancel/show', async (req, res)=>{
     try {
        const items = await Oder.find({cancel: true})
        res.send({good: true, result: items}) 
@@ -39,7 +39,7 @@ OrderRoute.get('/cancel', async (req, res)=>{
     }
 })
 
-OrderRoute.get('/done', async (req, res)=>{
+OrderRoute.get('/done/show', async (req, res)=>{
     try {
        const items = await Oder.find({delevred: true, cancel: false})
        res.send({good: true, result: items}) 
@@ -48,7 +48,7 @@ OrderRoute.get('/done', async (req, res)=>{
     }
 })
 
-OrderRoute.get('/take', async (req, res)=>{
+OrderRoute.get('/take/show', async (req, res)=>{
     try {
        const items = await Oder.find({take: true, cancel: false})
        res.send({good: true, result: items}) 
