@@ -3,7 +3,7 @@ const Oder = require('../model/order.model')
 
 OrderRoute.get('/', async (req, res)=>{
     try {
-       const items = await Oder.find({ delevred: false, cancel: false})
+       const items = await Oder.find({ delevred: false, cancel: false, take: false})
        res.send({good: true, result: items, length: items.length}) 
     } catch (error) {
         res.send({good: false, message: error.message})
