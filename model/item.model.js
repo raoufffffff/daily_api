@@ -5,6 +5,8 @@ const item = new mongoose.Schema({
     img: String,
     price: Number,
     offer: Boolean,
+    g: String,
+    typeoftype: String,
     out: Boolean,
     type: String,
     newprice: Number
