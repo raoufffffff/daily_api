@@ -4,7 +4,7 @@ const Order = require("../model/order.model");
 // Fetch all active orders
 OrderRoute.get("/", async (req, res) => {
   try {
-    const items = await Order.find({ delivered: false, cancel: false });
+    const items = await Order.find({ delevred: false, cancel: false });
     res.status(200).send({ good: true, result: items, length: items.length });
   } catch (error) {
     res.status(500).send({ good: false, message: error.message });
@@ -36,7 +36,7 @@ OrderRoute.get("/cancel/show", async (req, res) => {
 // Fetch delivered orders
 OrderRoute.get("/done/show", async (req, res) => {
   try {
-    const items = await Order.find({ delivered: true, cancel: false });
+    const items = await Order.find({ delevred: true, cancel: false });
     res.status(200).send({ good: true, result: items });
   } catch (error) {
     res.status(500).send({ good: false, message: error.message });
@@ -81,7 +81,7 @@ OrderRoute.put("/take/:id", async (req, res) => {
 OrderRoute.put("/delivered/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    const item = await Order.findByIdAndUpdate(id, { delivered: true }, { new: true });
+    const item = await Order.findByIdAndUpdate(id, { delevred: true }, { new: true });
     if (!item) return res.status(404).send({ good: false, message: "Order not found" });
     res.status(200).send({ good: true, result: item });
   } catch (error) {
