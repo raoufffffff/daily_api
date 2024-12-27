@@ -20,16 +20,6 @@ OrderRoute.get('/:id', async (req, res)=>{
     }
 })
 
-OrderRoute.put('/cancel/:id', async (req, res)=>{
-    const {id} = req.params
-    try {
-       const items = await Oder.findByIdAndUpdate(id, {cancel: true})
-       res.send({good: true, result: items}) 
-    } catch (error) {
-        res.send({good: false, message: error.message})
-    }
-})
-
 OrderRoute.get('/cancel', async (req, res)=>{
     try {
        const items = await Oder.find({cancel: true})
@@ -56,6 +46,20 @@ OrderRoute.get('/take', async (req, res)=>{
         res.send({good: false, message: error.message})
     }
 })
+
+OrderRoute.put('/cancel/:id', async (req, res)=>{
+    const {id} = req.params
+    try {
+       const items = await Oder.findByIdAndUpdate(id, {cancel: true})
+       res.send({good: true, result: items}) 
+    } catch (error) {
+        res.send({good: false, message: error.message})
+    }
+})
+
+
+
+
 
 OrderRoute.put('/take/:id', async (req, res)=>{
     const {id} = req.params
