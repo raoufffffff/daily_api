@@ -24,7 +24,7 @@ OrderRoute.get("/:id", async (req, res) => {
 });
 
 // Fetch canceled orders
-OrderRoute.get("/cancel", async (req, res) => {
+OrderRoute.get("/cancel/show", async (req, res) => {
   try {
     const items = await Order.find({ cancel: true });
     res.status(200).send({ good: true, result: items });
@@ -34,7 +34,7 @@ OrderRoute.get("/cancel", async (req, res) => {
 });
 
 // Fetch delivered orders
-OrderRoute.get("/done", async (req, res) => {
+OrderRoute.get("/done/show", async (req, res) => {
   try {
     const items = await Order.find({ delivered: true, cancel: false });
     res.status(200).send({ good: true, result: items });
@@ -44,7 +44,7 @@ OrderRoute.get("/done", async (req, res) => {
 });
 
 // Fetch orders marked as taken
-OrderRoute.get("/take", async (req, res) => {
+OrderRoute.get("/take/show", async (req, res) => {
   try {
     const items = await Order.find({ take: true, cancel: false });
     res.status(200).send({ good: true, result: items });
