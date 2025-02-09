@@ -10,6 +10,16 @@ ItemRoute.get('/', async (req, res)=>{
     }
 })
 
+ItemRoute.get('/bar/:id', async (req, res) => {
+    const { id } = req.params
+    try {
+        const items = await Item.findOne({ barecode: id })
+        res.send({ good: true, result: items })
+    } catch (error) {
+        res.send({ good: false, message: error.message })
+    }
+})
+
 ItemRoute.put('/type', async (req, res)=>{
     const {id} = req.params
     const {type, offer} = req.body
