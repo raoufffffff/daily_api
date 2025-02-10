@@ -4,7 +4,10 @@ const Item = require('../model/item.model')
 ItemRoute.get('/', async (req, res)=>{
     try {
        const items = await Item.find()
-       res.send({good: true, result: items, length: items.length}) 
+        for(let i = 0; i < items.length; i++){
+        await Item.findByIdAndUpdate(items[i]._id, {img: "https://i.ibb.co/MxZPJ8jm/IMG-20250210-180507.png"})
+        }
+       res.send({good: true) 
     } catch (error) {
         res.send({good: false, message: error.message})
     }
